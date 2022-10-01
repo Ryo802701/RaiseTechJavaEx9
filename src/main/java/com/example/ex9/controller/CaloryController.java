@@ -1,7 +1,9 @@
 package com.example.ex9.controller;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -54,28 +56,37 @@ public class CaloryController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<String> create(@RequestBody Calory form) {
+	public ResponseEntity<Map<String, String>> create(@RequestBody Calory form, UriComponentsBuilder uriBuilder) {
 		caloryService.create(form);
 
 		int newid = form.getId();
 
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:8080").path("/menu/" + String.valueOf(newid))
-				.build().toUri();
-		return ResponseEntity.created(uri).body("successfully created");
+		URI uri = uriBuilder.path("menu").pathSegment(String.valueOf(newid)).build().toUri();
+
+		Map<String, String> response = new HashMap<>();
+		response.put("message", "successfully created");
+
+		return ResponseEntity.created(uri).body(response);
 	}
 
 	@PatchMapping("/update")
-	public ResponseEntity<String> update(@RequestBody Calory form) {
+	public ResponseEntity<Map<String, String>> update(@RequestBody Calory form) {
 		caloryService.update(form);
 
-		return ResponseEntity.ok("successfully updated");
+		Map<String, String> response = new HashMap<>();
+		response.put("message", "successfully updated");
+
+		return ResponseEntity.ok(response);
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id") int id) {
+	public ResponseEntity<Map<String, String>> delete(@PathVariable("id") int id) {
 		caloryService.delete(id);
 
-		return ResponseEntity.ok("successfully deleted");
+		Map<String, String> response = new HashMap<>();
+		response.put("message", "successfully deleted");
+
+		return ResponseEntity.ok(response);
 	}
 
 }
