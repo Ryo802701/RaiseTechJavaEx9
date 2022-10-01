@@ -1,4 +1,4 @@
-package com.example.RaiseTechJavaEx9;
+package com.example.ex9;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

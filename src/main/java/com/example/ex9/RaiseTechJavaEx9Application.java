@@ -1,4 +1,4 @@
-package com.example.RaiseTechJavaEx9;
+package com.example.ex9;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
